@@ -15,7 +15,7 @@
                 android:endColor="#00ffffff"
                 android:centerY="0.50"
                 android:startColor="#00ffffff"
-                android:centerColor="@color/sinch_purple"
+                android:centerColor="@color/jobninja_red_dark"
                 android:type="sweep"
                 android:useLevel="false"/>
     </shape>

@@ -5,4 +5,7 @@
     <color name="sinch_grey">#636363</color>
     <color name="sinch_medium_grey">#B0B0B0</color>
     <color name="sinch_light_grey">#D9D9D9</color>
+    <color name="jobninja_red">#b8382f</color>
+    <color name="disabled_jobninja_red">#ff958d</color>
+    <color name="jobninja_red_dark">#FF9F3129</color>
 </resources>

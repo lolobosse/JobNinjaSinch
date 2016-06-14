@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
 
     private EditText mPhoneNumber;
     private Button mSmsButton;
-    private Button mFlashCallButton;
     private String mCountryIso;
     private TextWatcher mNumberTextWatcher;
 
@@ -42,7 +41,6 @@ public class MainActivity extends Activity {
 
         mPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         mSmsButton = (Button) findViewById(R.id.smsVerificationButton);
-        mFlashCallButton = (Button) findViewById(R.id.callVerificationButton);
 
         mCountryIso = PhoneNumberUtils.getDefaultCountryIso(this);
         final String defaultCountryName = new Locale("", mCountryIso).getDisplayName();
@@ -93,15 +91,11 @@ public class MainActivity extends Activity {
 
     private void setButtonsEnabled(boolean enabled) {
         mSmsButton.setEnabled(enabled);
-        mFlashCallButton.setEnabled(enabled);
     }
 
     public void onButtonClicked(View view) {
-        if (view == mSmsButton) {
+        if (view == mSmsButton)
             openActivity(getE164Number(), SMS);
-        } else if (view == mFlashCallButton) {
-            openActivity(getE164Number(), FLASHCALL);
-        }
     }
 
     private void resetNumberTextWatcher(String countryIso) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="enterphonenumber">Ihre Telefonnummer</string>
+    <string name="selectcountry">Land Auswählen</string>
+
+    <string name="sending_sms">Wir schicken ein SMS zu</string>
+    <string name="inprogress">Lädt</string>
+    <string name="verified">Verifizierung erfolgreich!</string>
+    <string name="failed">Verifizierung fehlschlagen!</string>
+    <string name="entercode">Please enter the code you received</string>
+
+</resources>
