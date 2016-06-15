@@ -160,7 +160,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
                 public void run() {
                     Intent i = new Intent();
                     i.putExtra("phone", ((TextView) findViewById(R.id.numberText)).getText());
-                    setResult(Activity.RESULT_OK);
+                    setResult(Activity.RESULT_OK, i);
                     finish();
                 }
             }, 2000);
