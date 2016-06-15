@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -51,11 +52,6 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
                 mVerification.initiate();
             }
 
-        } else {
-            TextView messageText = (TextView) findViewById(R.id.textView);
-            messageText.setText(R.string.flashcalling);
-            mVerification = SinchVerification.createFlashCallVerification(config, phoneNumber, listener);
-            mVerification.initiate();
         }
     }
 
@@ -151,6 +147,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         public void onInitiationFailed(Exception exception) {
             Log.e(TAG, "Verification initialization failed: " + exception.getMessage());
             hideProgressBarAndShowMessage(R.string.failed);
+            returnException(exception);
         }
 
         @Override
@@ -158,10 +155,20 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
             Log.d(TAG, "Verified!");
             hideProgressBarAndShowMessage(R.string.verified);
             showCompleted();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent();
+                    i.putExtra("phone", ((TextView) findViewById(R.id.numberText)).getText());
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+            }, 2000);
         }
 
         @Override
         public void onVerificationFailed(Exception exception) {
+            returnException(exception);
             Log.e(TAG, "Verification failed: " + exception.getMessage());
             if (exception instanceof CodeInterceptionException) {
                 hideProgressBar();
@@ -170,6 +177,18 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
             }
             enableInputField(true);
         }
+    }
+
+    private void returnException(final Exception exception) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent();
+                i.putExtra("exception", exception.getMessage());
+                setResult(Activity.RESULT_CANCELED, i);
+                finish();
+            }
+        }, 2000);
     }
 
 }

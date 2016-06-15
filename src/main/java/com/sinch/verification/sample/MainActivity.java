@@ -24,9 +24,9 @@ import java.util.Locale;
 public class MainActivity extends Activity {
 
     public static final String SMS = "sms";
-    public static final String FLASHCALL = "flashcall";
     public static final String INTENT_PHONENUMBER = "phonenumber";
     public static final String INTENT_METHOD = "method";
+    private static final int SMS_VERIFICATION = 1;
 
     private EditText mPhoneNumber;
     private Button mSmsButton;
@@ -86,7 +86,25 @@ public class MainActivity extends Activity {
         Intent verification = new Intent(this, VerificationActivity.class);
         verification.putExtra(INTENT_PHONENUMBER, phoneNumber);
         verification.putExtra(INTENT_METHOD, method);
-        startActivity(verification);
+        startActivityForResult(verification, SMS_VERIFICATION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SMS_VERIFICATION && resultCode == Activity.RESULT_OK){
+            Intent i =  new Intent();
+            i.putExtra("phone", data.getStringExtra("phone"));
+            setResult(Activity.RESULT_OK, i);
+            finish();
+        }
+        else if (requestCode == SMS_VERIFICATION && resultCode == Activity.RESULT_CANCELED){
+            Intent i = new Intent();
+            if (data.hasExtra("exception")){
+                i.putExtra("exception", data.getStringExtra("exception"));
+                setResult(RESULT_CANCELED, i);
+                finish();
+            }
+        }
     }
 
     private void setButtonsEnabled(boolean enabled) {
