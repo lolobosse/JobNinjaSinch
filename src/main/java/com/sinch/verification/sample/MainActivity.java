@@ -99,11 +99,14 @@ public class MainActivity extends Activity {
         }
         else if (requestCode == SMS_VERIFICATION && resultCode == Activity.RESULT_CANCELED){
             Intent i = new Intent();
-            if (data.hasExtra("exception")){
+            if (data != null && data.hasExtra("exception")){
                 i.putExtra("exception", data.getStringExtra("exception"));
-                setResult(RESULT_CANCELED, i);
-                finish();
             }
+            else{
+                i.putExtra("exception", "User clicked \"return\"");
+            }
+            setResult(RESULT_CANCELED, i);
+            finish();
         }
     }
 

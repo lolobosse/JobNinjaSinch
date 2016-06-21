@@ -5,9 +5,9 @@
     <string name="selectcountry">Land Auswählen</string>
 
     <string name="sending_sms">Wir schicken ein SMS zu</string>
-    <string name="inprogress">Lädt</string>
+    <string name="inprogress">Lädt…</string>
     <string name="verified">Verifizierung erfolgreich!</string>
     <string name="failed">Verifizierung fehlschlagen!</string>
-    <string name="entercode">Please enter the code you received</string>
-
+    <string name="entercode">Bitte geben Sie den Code ein, den Sie per SMS erhalten haben</string>
+    <string name="smsExplanation">Um den besten Service zu garantieren, müssen wir Ihre Handynummer überprüfen, damit Sie der Arbeitgeber einfach und sicher kontaktieren kann.</string>
 </resources>

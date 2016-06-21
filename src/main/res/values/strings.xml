@@ -11,5 +11,7 @@
     <string name="verified">Verification successful</string>
     <string name="failed">Verification failed</string>
     <string name="entercode">Please enter the code you received</string>
+    <string name="verification_loading">Verifizierung läuft</string>
+    <string name="smsExplanation">To provide you the best possible service, we need to check your telefon number in order that the employer can contact you fast and easily</string>
 
 </resources>

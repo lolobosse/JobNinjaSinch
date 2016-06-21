@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -55,7 +56,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         }
     }
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
         } else {
@@ -95,7 +96,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
                 mVerification.verify(code);
                 showProgress();
                 TextView messageText = (TextView) findViewById(R.id.textView);
-                messageText.setText("Verification in progress");
+                messageText.setText(R.string.verification_loading);
                 enableInputField(false);
             }
         }
@@ -168,12 +169,12 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
 
         @Override
         public void onVerificationFailed(Exception exception) {
-            returnException(exception);
             Log.e(TAG, "Verification failed: " + exception.getMessage());
             if (exception instanceof CodeInterceptionException) {
                 hideProgressBar();
             } else {
                 hideProgressBarAndShowMessage(R.string.failed);
+                returnException(exception);
             }
             enableInputField(true);
         }

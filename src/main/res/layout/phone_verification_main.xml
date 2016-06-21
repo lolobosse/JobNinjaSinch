@@ -6,12 +6,13 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/numberInputLayout"
-        android:background="@color/white"
-        android:padding="30dp"
-        android:src="@drawable/black_logo" />
+        android:src="@drawable/black_logo"
+        android:padding="5dp"
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/numberInputLayout"
@@ -24,11 +25,20 @@
         android:paddingTop="16dp">
 
         <TextView
+            android:id="@+id/explanationSMS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/smsExplanation"
+            android:textSize="16sp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/numberInputLayout"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:text="@string/selectcountry"
             android:textAllCaps="true"
@@ -80,7 +90,6 @@
             android:id="@+id/smsVerificationButton"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:background="@color/jobninja_red"
