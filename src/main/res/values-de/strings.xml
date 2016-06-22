@@ -3,8 +3,7 @@
 
     <string name="enterphonenumber">Ihre Telefonnummer</string>
     <string name="selectcountry">Land Auswählen</string>
-
-    <string name="sending_sms">Wir schicken ein SMS zu</string>
+    <string name="sending_sms">Wir schicken eine SMS an</string>
     <string name="inprogress">Lädt…</string>
     <string name="verified">Verifizierung erfolgreich!</string>
     <string name="failed">Verifizierung fehlschlagen!</string>
