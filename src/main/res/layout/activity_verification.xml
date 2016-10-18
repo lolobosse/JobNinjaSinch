@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="0dip"
-    tools:context="com.sinch.verification.sample.VerificationActivity">
+    tools:context="com.sinch.verification.sample.VerificationActivity"
+    android:background="@color/white">
 
     <ImageView
         android:layout_width="match_parent"
@@ -30,7 +32,6 @@
             android:gravity="center"
             android:text="@string/sending_sms"
             android:textAllCaps="true"
-            android:textColor="@color/jobninja_red"
             android:textSize="18sp" />
 
         <TextView
@@ -42,13 +43,13 @@
             android:layout_marginTop="0dp"
             android:text="+46123456789"
             android:textAllCaps="true"
-            android:textColor="@color/jobninja_red"
             android:textSize="18sp" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/inputContainer"
@@ -56,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:orientation="vertical"
-                android:visibility="gone">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,8 +67,8 @@
                     android:gravity="center"
                     android:text="@string/entercode"
                     android:textAllCaps="true"
-                    android:textColor="@color/jobninja_red"
                     android:textSize="18sp" />
+
 
                 <EditText
                     android:id="@+id/inputCode"
@@ -75,16 +76,21 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:hint="Code"
+                    android:imeOptions="actionDone"/>
 
                 <Button
                     android:id="@+id/codeInputButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:background="@color/jobninja_red"
-                    android:minHeight="56dp"
+                    android:minHeight="45dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
                     android:onClick="onSubmitClicked"
                     android:text="Submit"
                     android:textAllCaps="true"
