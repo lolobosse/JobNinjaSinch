@@ -24,13 +24,25 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        defaultPublishConfig 'release'
+        publishNonDefault true
     }
     lintOptions {
         checkReleaseBuilds false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            minifyEnabled false
+        }
     }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:23.0.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    debugCompile project(path: ':analytics', configuration: 'debug')
+    releaseCompile project(path: ':analytics', configuration: "release")
 }

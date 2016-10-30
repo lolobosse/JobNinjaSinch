@@ -21,6 +21,8 @@ import com.sinch.verification.PhoneNumberUtils;
 
 import java.util.Locale;
 
+import jobninja.eu.analytics.Analytics;
+
 public class MainActivity extends Activity {
 
     public static final String SMS = "sms";
@@ -86,6 +88,7 @@ public class MainActivity extends Activity {
         Intent verification = new Intent(this, VerificationActivity.class);
         verification.putExtra(INTENT_PHONENUMBER, phoneNumber);
         verification.putExtra(INTENT_METHOD, method);
+        Analytics.startedSMSVerificationProcess(this);
         startActivityForResult(verification, SMS_VERIFICATION);
     }
 

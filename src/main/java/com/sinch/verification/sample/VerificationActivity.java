@@ -23,6 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import jobninja.eu.analytics.Analytics;
+
 public class VerificationActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String TAG = Verification.class.getSimpleName();
@@ -154,6 +156,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         @Override
         public void onVerified() {
             Log.d(TAG, "Verified!");
+            Analytics.phoneVerified(VerificationActivity.this);
             hideProgressBarAndShowMessage(R.string.verified);
             showCompleted();
             new Handler().postDelayed(new Runnable() {
@@ -184,6 +187,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                Analytics.verificationFailed(VerificationActivity.this);
                 Intent i = new Intent();
                 i.putExtra("exception", exception.getMessage());
                 setResult(Activity.RESULT_CANCELED, i);
