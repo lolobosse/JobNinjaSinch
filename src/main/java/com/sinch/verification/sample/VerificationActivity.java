@@ -10,13 +10,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -36,7 +39,24 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
         showProgress();
+        setupView();
         initiateVerification();
+
+    }
+
+    private void setupView() {
+        EditText input = (EditText) findViewById(R.id.inputCode);
+
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_DONE){
+                    onSubmitClicked(v);
+                }
+                return false;
+            }
+        });
+
     }
 
     void createVerification(String phoneNumber, String method, boolean skipPermissionCheck) {
@@ -87,12 +107,19 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
             String method = intent.getStringExtra(MainActivity.INTENT_METHOD);
             TextView phoneText = (TextView) findViewById(R.id.numberText);
             phoneText.setText(phoneNumber);
-            createVerification(phoneNumber, method, skipPermissionCheck);
+            if (method != null && phoneNumber != null) {
+                createVerification(phoneNumber, method, skipPermissionCheck);
+            }
+            else{
+                enableInputField(true);
+                hideProgressBar();
+            }
         }
     }
 
     public void onSubmitClicked(View view) {
         String code = ((EditText) findViewById(R.id.inputCode)).getText().toString();
+
         if (!code.isEmpty()) {
             if (mVerification != null) {
                 mVerification.verify(code);
@@ -104,16 +131,19 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
         }
     }
 
+
     void enableInputField(boolean enable) {
         View container = findViewById(R.id.inputContainer);
         if (enable) {
             container.setVisibility(View.VISIBLE);
             EditText input = (EditText) findViewById(R.id.inputCode);
+            input.getBackground().setColorFilter(getResources().getColor(R.color.jobninja_red), PorterDuff.Mode.SRC_ATOP);
             input.requestFocus();
         } else {
             container.setVisibility(View.GONE);
         }
     }
+
 
     void hideProgressBarAndShowMessage(int message) {
         hideProgressBar();
@@ -177,7 +207,7 @@ public class VerificationActivity extends Activity implements ActivityCompat.OnR
                 hideProgressBar();
             } else {
                 hideProgressBarAndShowMessage(R.string.failed);
-                returnException(exception);
+                //returnException(exception);
             }
             enableInputField(true);
         }
